@@ -50,13 +50,9 @@ inputs:
   label: fastq
   doc: |-
     (-F) Output FASTQ file (single-end fastq or, if paired first end of the pair FASTQ). Required.
-  type:
-  - string
-  - 'null'
-  default: generated-_R1.fastq.gz
+  type: string
   inputBinding:
     prefix: --FASTQ
-    valueFrom: $(inputs.inp.basename.replace(/.bam$/, ""))-_R1.fastq.gz
     separate: true
 - id: arguments_file
   label: arguments_file
@@ -302,10 +298,8 @@ inputs:
   type:
   - string
   - 'null'
-  default: generated-_R2.fastq.gz
   inputBinding:
     prefix: --SECOND_END_FASTQ
-    valueFrom: $(inputs.inp.basename.replace(/.bam$/, ""))-_R2.fastq.gz
     separate: true
 - id: showhidden
   label: showhidden
@@ -334,10 +328,8 @@ inputs:
   type:
   - string
   - 'null'
-  default: generated-_U.fastq.gz
   inputBinding:
     prefix: --UNPAIRED_FASTQ
-    valueFrom: $(inputs.inp.basename.replace(/.bam$/, ""))-_U.fastq.gz
     separate: true
 - id: use_jdk_deflater
   label: use_jdk_deflater
@@ -364,7 +356,7 @@ inputs:
   doc: |2-
      Validation stringency for all SAM files read by this program.  Setting stringency to SILENT can improve performance when processing a BAM file in which variable-length data (read, qualities, tags) do not otherwise need to be decoded.  Default value: STRICT. Possible values: {STRICT, LENIENT, SILENT} 
   type:
-  - boolean
+  - string
   - 'null'
   inputBinding:
     prefix: --VALIDATION_STRINGENCY
@@ -413,3 +405,4 @@ arguments:
   valueFrom: |-
     $("-Xmx{memory}G {compression} {otherargs}".replace(/\{memory\}/g, (([inputs.runtime_memory, 4].filter(function (inner) { return inner != null })[0] * 3) / 4)).replace(/\{compression\}/g, (inputs.compression_level != null) ? ("-Dsamjdk.compress_level=" + inputs.compression_level) : "").replace(/\{otherargs\}/g, [inputs.javaOptions, []].filter(function (inner) { return inner != null })[0].join(" ")))
 id: GatkSamToFastq
+

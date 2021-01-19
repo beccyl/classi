@@ -48,7 +48,9 @@ class Gatk4SamToFastqBase(Gatk4ToolBase, ABC):
                 tag="fastq",
                 input_type=Filename(
                     prefix=InputSelector("inp", remove_file_extension=True),
+                    suffix=".R1",
                     extension=".fastq.gz",
+                    optional=False,
                 ),
                 prefix="--FASTQ",
                 separate_value_from_prefix=True,
@@ -286,8 +288,9 @@ class Gatk4SamToFastqBase(Gatk4ToolBase, ABC):
                 tag="second_end_fastq",
                 input_type=Filename(
                     prefix=InputSelector("inp", remove_file_extension=True),
-                    suffix="_R2",
+                    suffix=".R2",
                     extension=".fastq.gz",
+                    optional=True,
                 ),
                 prefix="--SECOND_END_FASTQ",
                 separate_value_from_prefix=True,
@@ -317,8 +320,9 @@ class Gatk4SamToFastqBase(Gatk4ToolBase, ABC):
                 tag="unpaired_fastq",
                 input_type=Filename(
                     prefix=InputSelector("inp", remove_file_extension=True),
-                    suffix="_U",
+                    suffix=".U",
                     extension=".fastq.gz",
+                    optional=True,
                 ),
                 prefix="--UNPAIRED_FASTQ",
                 separate_value_from_prefix=True,
@@ -346,7 +350,7 @@ class Gatk4SamToFastqBase(Gatk4ToolBase, ABC):
             ),
             ToolInput(
                 tag="validation_stringency",
-                input_type=Boolean(optional=True),
+                input_type=String(optional=True),
                 prefix="--VALIDATION_STRINGENCY",
                 separate_value_from_prefix=True,
                 doc=InputDocumentation(
