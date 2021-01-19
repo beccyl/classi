@@ -50,9 +50,13 @@ inputs:
   label: fastq
   doc: |-
     (-F) Output FASTQ file (single-end fastq or, if paired first end of the pair FASTQ). Required.
-  type: string
+  type:
+  - string
+  - 'null'
+  default: generated.R1.fastq.gz
   inputBinding:
     prefix: --FASTQ
+    valueFrom: $(inputs.inp.basename.replace(/.bam$/, "")).R1.fastq.gz
     separate: true
 - id: arguments_file
   label: arguments_file
@@ -298,8 +302,10 @@ inputs:
   type:
   - string
   - 'null'
+  default: generated.R2.fastq.gz
   inputBinding:
     prefix: --SECOND_END_FASTQ
+    valueFrom: $(inputs.inp.basename.replace(/.bam$/, "")).R2.fastq.gz
     separate: true
 - id: showhidden
   label: showhidden
@@ -328,8 +334,10 @@ inputs:
   type:
   - string
   - 'null'
+  default: generated.U.fastq.gz
   inputBinding:
     prefix: --UNPAIRED_FASTQ
+    valueFrom: $(inputs.inp.basename.replace(/.bam$/, "")).U.fastq.gz
     separate: true
 - id: use_jdk_deflater
   label: use_jdk_deflater
