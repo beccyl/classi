@@ -1,4 +1,4 @@
-from base import Gatk4SamToFastqBase
+from .base import Gatk4SamToFastqBase
 from janis_bioinformatics.tools.gatk4.versions import Gatk_4_1_4_0
 
 
