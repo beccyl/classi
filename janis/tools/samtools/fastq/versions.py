@@ -1,4 +1,4 @@
-from base import SamToolsFastqBase
+from .base import SamToolsFastqBase
 from janis_bioinformatics.tools.samtools.samtools_1_7 import SamTools_1_7
 from janis_bioinformatics.tools.samtools.samtools_1_9 import SamTools_1_9
 
