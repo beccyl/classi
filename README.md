@@ -3,10 +3,9 @@ CLoud Application Sequence-Search Index
 
 Workflow for use in cloud environment.
 
-References:
-* [Common Workflow Language] (https://janis.readthedocs.io/en/latest/)
 
-Software:
+Software / Other:
+* [Common Workflow Language] (https://commonwl.org)
 * [Janis] (https://janis.readthedocs.io/en/latest/)
 * [Docker] (https://www.docker.com/)
 * [cwltool] (https://github.com/common-workflow-language/cwltool)
@@ -31,6 +30,13 @@ TODO further compatibility with Janis:
 3. Write the workflow(s) using the above PythonTools, and CommandLineTools.
 
 Use of the workflow in cloud environment.  Take note of scatter inputs.
+
+## Workflows
+### Fastq to squeakr
+
+### Bam to squeakr
+
+### Scatter Bam inputs
 
 
 ## References:
