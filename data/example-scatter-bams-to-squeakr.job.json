@@ -1,0 +1,14 @@
+{
+    "bam_inputs": [
+        {
+            "class": "File",
+            "path": "data/file1.bam"
+        },
+        {
+            "class": "File",
+            "path": "data/file2.bam"
+        }
+    ],
+    "cutoff": 3,
+    "kmer-size": 32
+}
