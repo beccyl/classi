@@ -1,65 +1,35 @@
 class: Workflow
 cwlVersion: v1.0
-id: classi_bam2_wf
-label: classi-bam2-wf
+id: classi_bam_wf
+label: classi-bam-wf
 $namespaces:
+  s: 'https://schema.org/'
   sbg: 'https://www.sevenbridges.com/'
-  s: https://schema.org/
-
-$schemas:
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- https://schema.org/docs/schema_org_rdfa.html
-
 inputs:
-  - id: bam
+  - id: inp
     type: File
-    'sbg:x': -488.1937561035156
-    'sbg:y': -12.929893493652344
+    'sbg:x': -325
+    'sbg:y': -14
   - id: kmer-size
     type: int
     'sbg:exposed': true
+  - id: cutoff
+    type: int?
+    'sbg:exposed': true
 outputs:
-  - id: output
+  - id: out
     outputSource:
-      - classi_fastq_wf/output
+      - classi_fastq_wf/out
     type: File
-    'sbg:x': 319.0574645996094
-    'sbg:y': -15.525801658630371
+    'sbg:x': 368
+    'sbg:y': -16
 steps:
-  - id: _sam_tools_fastq
-    in:
-      - id: bam
-        source: _sam_tools_sort/out
-    out:
-      - id: out
-      - id: nonspecific
-      - id: read1
-      - id: read2
-      - id: singleton
-    run: ./samtools-fastq.cwl
-    label: 'SamTools: Fastq'
-    'sbg:x': -188.0185089111328
-    'sbg:y': -15.035053253173828
-  - id: _sam_tools_sort
-    in:
-      - id: bam
-        source: bam
-    out:
-      - id: out
-    run: ./samtools-sort.cwl
-    label: 'SamTools: Sort'
-    'sbg:x': -353.1587219238281
-    'sbg:y': -15.035053253173828
   - id: filter-empty-files
     in:
       - id: infiles
-        source:
-          - _sam_tools_fastq/read2
-          - _sam_tools_fastq/singleton
-          - _sam_tools_fastq/read1
-          - _sam_tools_fastq/nonspecific
         linkMerge: merge_flattened
+        source:
+          - _gatk_sam_to_fastq/out
     out:
       - id: outfiles
     run: ./filter-empty-files.cwl
@@ -69,16 +39,42 @@ steps:
   - id: classi_fastq_wf
     in:
       - id: kmer-size
+        default: 32
         source: kmer-size
       - id: input
         source:
           - filter-empty-files/outfiles
+      - id: cutoff
+        default: 3
+        source: cutoff
     out:
-      - id: output
+      - id: out
     run: ./classi-fastq-wf.cwl
     label: 'Classi: fastq to squeakr workflow'
-    'sbg:x': 171.95034790039062
-    'sbg:y': -13.595909118652344
+    'sbg:x': 197
+    'sbg:y': -14.042083740234375
+  - id: _gatk_sam_to_fastq
+    in:
+      - id: inp
+        source: inp
+      - id: validation_stringency
+        default: LENIENT
+    out:
+      - id: out
+    run: ./gatk-samtofastq.cwl
+    label: 'Gatk4: SamToFastq'
+    'sbg:x': -153
+    'sbg:y': -14
 requirements:
   - class: SubworkflowFeatureRequirement
-  - class: MultipleInputFeatureRequirement
+$schemas:
+  - 'http://dublincore.org/2012/06/14/dcterms.rdf'
+  - 'http://xmlns.com/foaf/spec/20140114.rdf'
+  - 'https://schema.org/docs/schema_org_rdfa.html'
+'s:author':
+  - class: 's:Person'
+    's:email': 'mailto:rebecca.louise.evans@gmail.com'
+    's:identifier': 'https://orcid.org/0000-0002-4923-0662'
+    's:name': Rebecca Evans
+'s:codeRepository': 'https://github.com/beccyl/classi'
+'s:dateCreated': '2021-02-01'

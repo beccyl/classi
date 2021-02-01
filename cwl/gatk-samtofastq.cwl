@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
+cwlVersion: v1.2
 class: CommandLineTool
-cwlVersion: v1.0
 label: 'Gatk4: SamToFastq'
 doc: |2
 
@@ -412,5 +412,20 @@ arguments:
   position: -1
   valueFrom: |-
     $("-Xmx{memory}G {compression} {otherargs}".replace(/\{memory\}/g, (([inputs.runtime_memory, 4].filter(function (inner) { return inner != null })[0] * 3) / 4)).replace(/\{compression\}/g, (inputs.compression_level != null) ? ("-Dsamjdk.compress_level=" + inputs.compression_level) : "").replace(/\{otherargs\}/g, [inputs.javaOptions, []].filter(function (inner) { return inner != null })[0].join(" ")))
-id: GatkSamToFastq
 
+hints:
+- class: ToolTimeLimit
+  timelimit: |-
+    $([inputs.runtime_seconds, 86400].filter(function (inner) { return inner != null })[0])
+id: GatkSamToFastq
+$schemas:
+  - 'http://dublincore.org/2012/06/14/dcterms.rdf'
+  - 'http://xmlns.com/foaf/spec/20140114.rdf'
+  - 'https://schema.org/docs/schema_org_rdfa.html'
+'s:author':
+  - class: 's:Person'
+    's:email': 'mailto:rebecca.louise.evans@gmail.com'
+    's:identifier': 'https://orcid.org/0000-0002-4923-0662'
+    's:name': Rebecca Evans
+'s:codeRepository': 'https://github.com/beccyl/classi'
+'s:dateCreated': '2021-01-12'

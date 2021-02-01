@@ -25,7 +25,7 @@ expression: |
       var files = [];
       for (var i = 0; i < inputs.infiles.length; i++) {
         var file = inputs.infiles[i];
-        if (file.size > 0) {
+        if (file.size > 200) {
           files.push(file);
         }
       }

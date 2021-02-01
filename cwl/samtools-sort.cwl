@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
+cwlVersion: v1.2
 class: CommandLineTool
-cwlVersion: v1.0
 label: 'SamTools: Sort'
 doc: |-
   Ensure SAMTOOLS.SORT is inheriting from parent metadata
@@ -145,4 +145,20 @@ baseCommand:
 - samtools
 - sort
 arguments: []
+
+hints:
+- class: ToolTimeLimit
+  timelimit: |-
+    $([inputs.runtime_seconds, 86400].filter(function (inner) { return inner != null })[0])
 id: SamToolsSort
+$schemas:
+  - 'http://dublincore.org/2012/06/14/dcterms.rdf'
+  - 'http://xmlns.com/foaf/spec/20140114.rdf'
+  - 'https://schema.org/docs/schema_org_rdfa.html'
+'s:author':
+  - class: 's:Person'
+    's:email': 'mailto:rebecca.louise.evans@gmail.com'
+    's:identifier': 'https://orcid.org/0000-0002-4923-0662'
+    's:name': Rebecca Evans
+'s:codeRepository': 'https://github.com/beccyl/classi'
+'s:dateCreated': '2021-01-12'

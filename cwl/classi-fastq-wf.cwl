@@ -3,14 +3,8 @@ cwlVersion: v1.0
 id: classi_fastq_wf
 label: 'Classi: fastq to squeakr workflow'
 $namespaces:
+  s: 'https://schema.org/'
   sbg: 'https://www.sevenbridges.com/'
-  s: https://schema.org/
-
-$schemas:
-- http://dublincore.org/2012/06/14/dcterms.rdf
-- http://xmlns.com/foaf/spec/20140114.rdf
-- https://schema.org/docs/schema_org_rdfa.html
-
 inputs:
   - id: kmer-size
     type: int
@@ -21,66 +15,75 @@ inputs:
     type: 'File[]'
     'sbg:x': -1012.796875
     'sbg:y': -168
+  - id: cutoff
+    type: int?
+    'sbg:x': -827.8883056640625
+    'sbg:y': -49.768821716308594
 outputs:
-  - id: output
+  - id: out
     outputSource:
-      - squeakr_count/output
+      - _squeakr_count/out
     type: File
-    'sbg:x': -274.2442321777344
-    'sbg:y': -244.67098999023438
+    'sbg:x': -355.4664306640625
+    'sbg:y': -175.11660766601562
 steps:
-  - id: lognumslots_tool
+  - id: nt_card
     in:
-      - id: ntcard-hist
-        source: ntcard_tool/output
-    out:
-      - id: output
-    run: ./lognumslots.cwl
-    label: 'lognumslots: script'
-    'sbg:x': -575.1642456054688
-    'sbg:y': -375.5325927734375
-  - id: ntcard_tool
-    in:
-      - id: threads
-        default: 1
-      - id: k-size
-        default: 32
+      - id: files
+        source:
+          - input
+      - id: kmer
         source: kmer-size
       - id: prefix
         default: ./
-      - id: input
-        source:
-          - input
+    out:
+      - id: out
+    run: ./ntcard.cwl
+    label: ntCard
+    'sbg:x': -837.796875
+    'sbg:y': -276.5
+  - id: lognumslots_tool
+    in:
+      - id: ntcard-hist
+        source: nt_card/out
     out:
       - id: output
-    run: ./ntcard.cwl
-    label: NtCard
-    'sbg:x': -797.008544921875
-    'sbg:y': -282
-  - id: squeakr_count
+    run: ./lognumslots.cwl
+    label: lognumslots-tool
+    'sbg:x': -574.793701171875
+    'sbg:y': -374.5
+  - id: _squeakr_count
     in:
-      - id: k-size
+      - id: exact
+        default: true
+      - id: kmer_size
         source: kmer-size
       - id: cutoff
-        default: 3
-      - id: log-slots
+        source: cutoff
+      - id: no_counts
+        default: true
+      - id: log_slots
         source: lognumslots_tool/output
-      - id: input-files
+      - id: input_list
         source:
           - input
-      - id: out-file
+      - id: out_file
         default: ./output.squeakr
     out:
-      - id: output
+      - id: out
     run: ./squeakr-count.cwl
-    label: squeakr-count
-    'sbg:x': -450.1314697265625
-    'sbg:y': -245.63128662109375
+    label: 'Squeakr: Count'
+    'sbg:x': -511.07171630859375
+    'sbg:y': -174.55035400390625
 requirements: []
+$schemas:
+  - 'http://dublincore.org/2012/06/14/dcterms.rdf'
+  - 'http://xmlns.com/foaf/spec/20140114.rdf'
+  - 'https://schema.org/docs/schema_org_rdfa.html'
 's:author':
   - class: 's:Person'
     's:email': 'mailto:rebecca.louise.evans@gmail.com'
     's:identifier': 'https://orcid.org/0000-0002-4923-0662'
-    's:name': 'Rebecca Evans'
+    's:name': Rebecca Evans
 's:codeRepository': 'https://github.com/beccyl/classi'
 's:dateCreated': '2021-01-12'
