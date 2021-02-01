@@ -1,7 +1,37 @@
 # classi
-cloud application sequence-search index
+CLoud Application Sequence-Search Index
 
 Workflow for use in cloud environment.
+
+References:
+* [Common Workflow Language] (https://janis.readthedocs.io/en/latest/)
+
+Software:
+* [Janis] (https://janis.readthedocs.io/en/latest/)
+* [Docker] (https://www.docker.com/)
+* [cwltool] (https://github.com/common-workflow-language/cwltool)
+
+To generate CWL for tools:
+```
+cd janis/tools
+janis translate --name Gatk4SamToFastqLatest --output-dir ../../cwl __init__.py cwl
+janis translate --name NtCardLatest --output-dir ../../cwl __init__.py cwl
+janis translate --name SqueakrCountLatest --output-dir ../../cwl __init__.py cwl
+janis translate --name MantisBuildLatest --output-dir ../../cwl __init__.py cwl
+janis translate --name SamtoolsFastqLatest --output-dir ../../cwl __init__.py cwl
+janis translate --name SamtoolsSortLatest --output-dir ../../cwl SamToolsSort cwl
+```
+* SamToolsSort is defined in janis.bioinformatics.tools
+* RabixComposer does not support cwl v1.2, supports cwl v1.0 (rename the CWL version to v1.0 in generated files)
+
+
+TODO further compatibility with Janis:
+1. Create a PythonTool for FilterEmptyFiles.cwl.  Currently this is implemented as a CWL ExpressionTool.  [See issue #57 on github] (https://github.com/PMCC-BioinformaticsCore/janis-core/issues/57)
+2. Create a PythonTool equivalent for lognumslots.cwl.  How to pass output from one CommandTool as an input parameter to another CommandTool in Janis?  One idea would be to create a subclass for Selector?  In cwl we can use loadContents: True, and outputEval.
+3. Write the workflow(s) using the above PythonTools, and CommandLineTools.
+
+Use of the workflow in cloud environment.  Take note of scatter inputs.
+
 
 ## References:
 

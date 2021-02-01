@@ -101,6 +101,7 @@ class SqueakrCountBase(SqueakrToolBase, ABC):
                 input_type=Filename(
                     prefix="./output",  ## squeakr bug(?) needs directory name
                     extension=".squeakr",
+                    optional=False,
                 ),
                 prefix="-o",
                 position=9,
