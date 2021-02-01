@@ -33,10 +33,16 @@ Use of the workflow in cloud environment.  Take note of scatter inputs.
 
 ## Workflows
 ### Fastq to squeakr
+Base workflow - converts fastq input to a squeakr output
+![](https://github.com/beccyl/classi/blob/main/docs/img/fastq_to_squeakr.jpg "Fastq to Squeakr Workfow")
 
 ### Bam to squeakr
+Builds on base workflow.  Convert bam to fastq then pass through above workflow.
+![](https://github.com/beccyl/classi/blob/main/docs/img/bam_to_squeakr.jpg "Bam to Squeakr Workfow")
 
 ### Scatter Bam inputs
+Scatter Bam inputs - to run multiple bam inputs in parallel.
+![](https://github.com/beccyl/classi/blob/main/docs/img/scatter_bams.jpg "Scatter Workfow")
 
 
 ## References:
