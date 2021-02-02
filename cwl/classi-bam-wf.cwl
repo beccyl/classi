@@ -24,15 +24,14 @@ outputs:
     'sbg:x': 368
     'sbg:y': -16
 steps:
-  - id: filter-empty-files
+  - id: FilterEmptyFiles
     in:
-      - id: infiles
-        linkMerge: merge_flattened
+      - id: files
         source:
           - _gatk_sam_to_fastq/out
     out:
       - id: outfiles
-    run: ./filter-empty-files.cwl
+    run: ./filter-empty-files-pythontool.cwl
     label: FilterEmptyFiles
     'sbg:x': 18.8763370513916
     'sbg:y': -14.035053253173828
@@ -43,7 +42,7 @@ steps:
         source: kmer-size
       - id: input
         source:
-          - filter-empty-files/outfiles
+          - FilterEmptyFiles/outfiles
       - id: cutoff
         default: 3
         source: cutoff
