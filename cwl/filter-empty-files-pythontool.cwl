@@ -35,7 +35,7 @@ requirements:
       def code_block(files: List[File]):
           import os
           return {
-              "outfiles": [f for f in files if os.stat(f).st_size > 200]
+              "outfiles": [f for f in files if os.stat(f).st_size > 200]  ## not zero but 200, for "empty" gz
           }
 
 
@@ -85,3 +85,14 @@ baseCommand:
 - python
 - FilterEmptyFiles-script.py
 id: FilterEmptyFiles
+$schemas:
+  - 'http://dublincore.org/2012/06/14/dcterms.rdf'
+  - 'http://xmlns.com/foaf/spec/20140114.rdf'
+  - 'https://schema.org/docs/schema_org_rdfa.html'
+'s:author':
+  - class: 's:Person'
+    's:email': 'mailto:rebecca.louise.evans@gmail.com'
+    's:identifier': 'https://orcid.org/0000-0002-4923-0662'
+    's:name': Rebecca Evans
+'s:codeRepository': 'https://github.com/beccyl/classi'
+'s:dateCreated': '2021-02-02'

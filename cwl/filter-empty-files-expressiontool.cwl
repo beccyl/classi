@@ -10,21 +10,21 @@ $schemas:
 - http://xmlns.com/foaf/spec/20140114.rdf
 - https://schema.org/docs/schema_org_rdfa.html
 
-id: filter-empty-files
+id: FilterEmptyFiles
 inputs:
-  - id: infiles
+  - id: files
     type: 'File[]'
 outputs:
   - id: outfiles
     type: 'File[]'
-label: filter-empty-files
+label: FilterEmptyFiles
 requirements:
   - class: InlineJavascriptRequirement
 expression: |
   ${
       var files = [];
-      for (var i = 0; i < inputs.infiles.length; i++) {
-        var file = inputs.infiles[i];
+      for (var i = 0; i < inputs.files.length; i++) {
+        var file = inputs.files[i];
         if (file.size > 200) {
           files.push(file);
         }
