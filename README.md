@@ -25,9 +25,8 @@ janis translate --name SamtoolsSortLatest --output-dir ../../cwl SamToolsSort cw
 
 
 TODO further compatibility with Janis:
-1. Create a PythonTool for FilterEmptyFiles.cwl.  Currently this is implemented as a CWL ExpressionTool.  [See issue #57 on github] (https://github.com/PMCC-BioinformaticsCore/janis-core/issues/57)
-2. Create a PythonTool equivalent for lognumslots.cwl.  How to pass output from one CommandTool as an input parameter to another CommandTool in Janis?  One idea would be to create a subclass for Selector?  In cwl we can use loadContents: True, and outputEval.
-3. Write the workflow(s) using the above PythonTools, and CommandLineTools.
+1. Create a PythonTool equivalent for lognumslots.cwl.  How to pass output from one CommandTool as an input parameter to another CommandTool in Janis?  One idea would be to create a subclass for Selector?  In cwl we can use loadContents: True, and outputEval.
+2. Write the workflows in Janis - once lognumslots tool written.
 
 Use of the workflow in cloud environment.  Take note of scatter inputs.
 
