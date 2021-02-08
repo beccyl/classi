@@ -382,13 +382,13 @@ class Gatk4SamToFastqBase(Gatk4ToolBase, ABC):
             #ToolOutput(
             #    "out",
             #    Fastq(),
-            #    glob=InputSelector("fastq"),
+            #    selector=InputSelector("fastq"),
             #    doc="Fastq to write extracted reads to",
             #),
             ToolOutput(
                 "out",
                 Array(FastqGz),
-                glob=WildcardSelector("*.fastq.gz"),
+                selector=WildcardSelector("*.fastq.gz"),
                 doc="Fastq gzipped output file(s).  May contain single-end or paired-end, or interleaved paired-end.",
             ),
         ]

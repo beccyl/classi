@@ -74,7 +74,7 @@ class MantisMstBase(MantisToolBase, ABC):
             ToolOutput(
                 "out",
                 Directory(),
-                glob=InputSelector("index_prefix"),
+                selector=InputSelector("index_prefix"),
             )
         ]
 

@@ -6,3 +6,4 @@ from gatk4.samtofastq.versions import Gatk4SamToFastqLatest
 from samtools.fastq.versions import SamToolsFastqLatest
 from squeakr.count.versions import SqueakrCountLatest
 from squeakr.query.versions import SqueakrQueryLatest
+from squeakr.lognumslots.versions import LogNumSlotsLatest

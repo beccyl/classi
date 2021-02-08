@@ -74,7 +74,7 @@ class MantisBuildBase(MantisToolBase, ABC):
             ToolOutput(
                 "out",
                 Directory(),
-                glob=InputSelector("build_output"),
+                selector=InputSelector("build_output"),
             )
         ]
 

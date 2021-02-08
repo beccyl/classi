@@ -92,7 +92,7 @@ class NtCardToolBase(BioinformaticsTool):
             ToolOutput(
                 "out",
                 File,
-                glob=WildcardSelector("*.hist")
+                selector=WildcardSelector("*.hist")
             )
         ]
 

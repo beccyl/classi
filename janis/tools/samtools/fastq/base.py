@@ -47,12 +47,12 @@ class SamToolsFastqBase(SamToolsToolBase, ABC):
     def outputs(self):
         return [
             ToolOutput("out", Stdout(Fastq)),
-            ToolOutput("nonspecific", Fastq(optional=True), glob=InputSelector("nonspecificFilename")),
-            ToolOutput("read1", Fastq(optional=True), glob=InputSelector("read1Filename")),
-            ToolOutput("read2", Fastq(optional=True), glob=InputSelector("read2Filename")),
-            ToolOutput("singleton", Fastq(optional=True), glob=InputSelector("singletonFilename")),
-            #ToolOutput("index1", Fastq(optional=True), glob=InputSelector("index1Filename")),
-            #ToolOutput("index2", Fastq(optional=True), glob=InputSelector("index2Filename")),
+            ToolOutput("nonspecific", Fastq(optional=True), selector=InputSelector("nonspecificFilename")),
+            ToolOutput("read1", Fastq(optional=True), selector=InputSelector("read1Filename")),
+            ToolOutput("read2", Fastq(optional=True), selector=InputSelector("read2Filename")),
+            ToolOutput("singleton", Fastq(optional=True), selector=InputSelector("singletonFilename")),
+            #ToolOutput("index1", Fastq(optional=True), selector=InputSelector("index1Filename")),
+            #ToolOutput("index2", Fastq(optional=True), selector=InputSelector("index2Filename")),
         ]
 
     def friendly_name(self):

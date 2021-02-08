@@ -48,6 +48,3 @@ class SqueakrToolBase(BioinformaticsTool, ABC):
     def arguments(self):
         return []
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs, tool_module="squeakr")
-

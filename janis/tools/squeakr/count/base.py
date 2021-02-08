@@ -18,6 +18,7 @@ from janis_core import (
 
 from janis_bioinformatics.data_types import Fastq, FastqGz
 from janis_core.types.common_data_types import UnionType
+from janis_core.operators.standard import FirstOperator
 
 from ..squeakrtoolbase import SqueakrToolBase
 
@@ -93,7 +94,7 @@ class SqueakrCountBase(SqueakrToolBase, ABC):
                 input_type=Array(UnionType(Fastq, FastqGz)),
                 position=10,
                 doc=InputDocumentation(
-                    doc="(-i)  file containing list of input filters. Required."
+                    doc="list of files to be counted (supported files: fastq and compressed gzip fastq) . Required."
                 ),
             ),
             ToolInput(
@@ -117,7 +118,7 @@ class SqueakrCountBase(SqueakrToolBase, ABC):
             ToolOutput(
                 "out",
                 File(),
-                glob=InputSelector("out_file"),
+                selector=InputSelector("out_file"),
             )
         ]
 
