@@ -10,7 +10,7 @@ Software / Other:
 * [Docker] (https://www.docker.com/)
 * [cwltool] (https://github.com/common-workflow-language/cwltool)
 
-To generate CWL for tools:
+To generate CWL for individual tools:
 ```
 cd janis/tools
 janis translate --name Gatk4SamToFastqLatest --output-dir ../../cwl __init__.py cwl
@@ -23,10 +23,12 @@ janis translate --name SamtoolsSortLatest --output-dir ../../cwl SamToolsSort cw
 * SamToolsSort is defined in janis.bioinformatics.tools
 * RabixComposer does not support cwl v1.2, supports cwl v1.0 (rename the CWL version to v1.0 in generated files)
 
-
-TODO further compatibility with Janis:
-1. Create a PythonTool equivalent for lognumslots.cwl.  How to pass output from one CommandTool as an input parameter to another CommandTool in Janis?  One idea would be to create a subclass for Selector?  In cwl we can use loadContents: True, and outputEval.
-2. Write the workflows in Janis - once lognumslots tool written.
+To generate CWL for the workflows:
+```
+cd janis/tools
+janis translate --output-dir ../../cwl bam_to_squeakr_workflow.py cwl
+janis translate --output-dir ../../cwl fastq_to_squeakr_workflow.py cwl
+```
 
 Use of the workflow in cloud environment.  Take note of scatter inputs.
 
